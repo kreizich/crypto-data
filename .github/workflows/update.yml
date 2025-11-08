@@ -2,8 +2,11 @@ name: Update Crypto Data
 
 on:
   schedule:
-    - cron: "0 * * * *"   # на всеки кръгъл час
-  workflow_dispatch:       # възможност за ръчно стартиране
+    - cron: "0 * * * *"   # на всеки час
+  workflow_dispatch:
+
+permissions:
+  contents: write   # ✅ нужно, за да може да пушва
 
 jobs:
   update:
