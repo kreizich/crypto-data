@@ -35,8 +35,14 @@ jobs:
         run: |
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
+
+          # 🧭 вземи последните промени от origin/main
           git fetch origin main
-          git rebase origin/main || git pull --rebase
+          git pull origin main --rebase || true
+
+          # 💾 добави и комитни новите файлове
           git add .
           git commit -m "auto update $(date)" || echo "Няма промени"
+
+          # 🚀 push с токен
           git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
