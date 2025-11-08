@@ -36,7 +36,10 @@ jobs:
           git config user.name "github-actions[bot]"
           git config user.email "github-actions[bot]@users.noreply.github.com"
 
-          # 🧭 вземи последните промени от origin/main
+          # 🧭 превключи на основния клон (ако не сме там)
+          git checkout main || git checkout -b main
+
+          # 🧩 синхронизирай с последното от origin/main
           git fetch origin main
           git pull origin main --rebase || true
 
@@ -45,4 +48,4 @@ jobs:
           git commit -m "auto update $(date)" || echo "Няма промени"
 
           # 🚀 push с токен
-          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git
+          git push https://x-access-token:${GITHUB_TOKEN}@github.com/${{ github.repository }}.git main
